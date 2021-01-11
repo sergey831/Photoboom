@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Фотобум</title>
+</head>
+<body>
+    <main>
+        <section class="img-filters img-filters--inactive container">
+            <h2 class="img-filters__title visually-hidden">Фильтр фотографии</h2>
+
+            <form class="img-filters__form" action="index.html" method="get" autocomplete="off">
+                <button type="button" class="img-filters__button img-filters__button--active" id="filter-popular">Популярные</button>
+                <button type="button" class="img-filters__button" id="filters-new">Новые</button>
+                <button type="button" class="img-filters__button" id="filters-discussed">Обсуждаемые</button>
+            </form>
+        </section>
+
+        <section class="pictures container">
+            <h2 class="pictures__title visually-hidden">Фотография двух пользователей</h2>
+
+            <section class="img-upload">
+                <div class="img-upload__wrapper">
+                    <h2 class="img-upload__title visually-hidden">Загрузка фотографии</h2>
+
+                    <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" action="https://js.dump" autocomplete="off">
+                        <fieldset class="img-upload__start">
+                            <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" required>
+                            <label for="upload-file" class="img-upload__label img-upload__control">Загрузить</label>
+                        </fieldset>
+
+                        <div class="img-upload__overlay hidden">
+                            <div class="img-upload__wrapper">
+                                <div class="img-upload__preview-container">
+                                    <fieldset class="img-upload__resize resize">
+                                        <button type="button" class="resize__control resize__control--minus">Уменьшить</button>
+                                        <input type="text" class="resize__control resize__control--value" value="55%" title="Image Scale" name="scale" readonly>
+                                        <button type="button" class="resize__control resize__control--plus">Увеличить</button>
+                                    </fieldset>
+                                    <div class="img-upload__preview">
+                                        <img src="img/upload-default-image.jpg" alt="Мюнхен">
+                                    </div>
+                                    <fieldset class="img-upload__scale scale">
+                                        <input type="number" class="scale__value" name="effect-level" value="20">
+                                        <div class="scale__line">
+                                            <div class="scale__pin" tabindex="0">Кнопка изменения глубины эффекта фотографии</div>
+                                            <div class="scale__level">Глубина эффекта фотографии</div>
+                                        </div>
+                                    </fieldset>
+                                    <button type="reset" class="img-upload__cancel cancel" id="upload-cancel">Закрыть</button>
+                                </div>
+
+                                <fieldset class="img-upload__effects effects">
+                                    <ul class="effects__list">
+                                        <li class="effects__item">
+                                            <input type="radio" claeffect-sepia="effects__radio visually-hidden" name="effect" id="effect-none" value="none">
+                                            <label for="effect-none" class="effects__label">
+                                                <span class="effects__preview effects__preview--none">Превью фото без эффекта</span>
+                                                Оригинал
+                                            </label>
+                                        </li>
+                                        <li class="effects__item">
+                                            <input type="radio" class="effects__radio visually-hidden" name="effect" id="effect-chrome" value="chrome">
+                                            <label for="effect-chrome" class="effects__label">
+                                                <span class="effects__preview effects__preview--chrome">Превью эффекта с хромом</span>
+                                                Хром
+                                            </label>
+                                        </li>
+                                        <li class="effects__item">
+                                            <input type="radio" class="effects__radio visally-hidden" name="effect" id="effect-sepia" value="sepia">
+                                            <label for="effect-sepia" class="effects__label">
+                                                <span class="effects__preview effects__preview--sepia">Превью эффекта сепиия</span>
+                                                Сепия
+                                            </label>
+                                        </li>
+                                        <li class="effects__item">
+                                            <input type="radio" class="effects__radio visually-hidden" name="effect" id="effect-marvin" value="marvin">
+                                            <label for="effect-marvin" class="effects__label">
+                                                <span class="effects__preview effects__preview--marvin">Превью эффекта Марвин</span>
+                                                Марвин
+                                            </label>
+                                        </li>
+                                        <li class="effects__item">
+                                            <input type="radio" class="effects_radio visually-hidden" name="effect" id="effect-phobos" value="phobos">
+                                            <label for="effect-phobos" class="effect__label">
+                                                <span class="effects__preview effects__preview--phobos">Превью эффекта Фобос</span>
+                                                Фобос
+                                            </label>
+                                        </li>
+                                        <li class="effects__item">
+                                            <input type="radio" class="effects__radio visually-hidden" name="effect" id="effect-heat" value="heat" checked>
+                                            <label for="effect-heat" class="effects__label">
+                                                <span class="effects__preview effects__preview--heat">Превью эффекта Зной</span>
+                                                Зной
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </fieldset>
+
+                                <fieldset class="img-upload__text text">
+                                    <input class="text__hashtags" type="text" name="hashtags" placeholder="#хэш-тег">
+                                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
+                                </fieldset>
+
+                                <button class="img-upload__submit" type="submit" id="upload-submit">Опубликовать</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </section>
+
+        <section class="big-picture overlay hidden">
+            <h2 class="big-picture__title visually-hidden">Просмотр фотографии</h2>
+            <div class="big-picture__preview">
+                <div class="big-picture__img">
+                    <img src="img/logo-background-3.jpg" alt="Баварский замок" width="640" height="640">
+                </div>
+
+                <div class="big-picture__social social">
+                    <div class="social__header">
+                        <img class="social__picture" src="img/social/avatar-1.svg" alt="Аватар фото автора" width="34" height="34">
+                        <p class="social__caption">Тестируем новую камеру! =)</p>
+                        <p class="social__likes"> Нравится <span class="likes-count">356</span></p>
+                    </div>
+                    <div class="social__comment-count">5 из <span class="comments-count">125</span>комментариев</div>
+                    <ul class="social__comments">
+                        <li class="social__comment">
+                            <img class="social__picture" src="img/social/avatar-4.svg" alt="Аватар комментатора фотографии" width="34" height="34">
+                            <p class="social__text">Мега фото! Просто обалдеть. Как вам так удалось?</p>
+                        </li>
+                        <li class="social__comment">
+                            <img class="social__picture" src="img/social/avatar-3.svg" alt="Аватар комментатора фотографии" width="34" height="34">
+                            <p class="social__text">Да это фотошоп!</p>
+                        </li>
+                    </ul>
+                    <button class="social__loadmore" type="button">Загрузить еще</button>
+                    <div class="social__footer">
+                        <img class="social__picture" src="img/social/avatar-6.svg" alt="Аватар комментатора фотографии" width="37" height="37">
+                        <input class="social__footer-text" type="text" placeholder="Ваш комментарий...">
+                        <button class="social__footer-btn" type="button" name="button">Отправить</button>
+                    </div>
+                </div>
+                <button class="big-picture__cancel cancel" type="reset" id="picture-cancel">Закрыть</button>
+            </div>
+        </section>
+    </main>
+
+<footer class="page-footer container">
+    <div class="page-footer__wrapper">
+        <div class="page-footer__copyright copyright">
+            <a class="copyright__link copyright__link--image" href="https://github.com/sergey831"><img src="img/social/sz-logo.svg" width="130" height="45" alt="Занько Сергей"></a>
+            <pСделано в <a class="copyright__link copyright__link--text" href="https://github.com/sergey831">"https://github.com/sergey831"</a> &copy; 2021</p>
+        </div>
+        <ul class="page--footer__contacts contacts">
+            <li>
+                <a class="contacts__link contacts__link--twitter" href="https://github.com/sergey831">Twitter</a>
+            </li>
+            <li>
+                <a class="contacts__link contacts__link--instagram" href="https://github.com/sergey831">Instagram</a>
+            </li>
+            <li>
+                <a class="contacts__link contacts__link--facebook" href="https://github.com/sergey831">Fecebook</a>
+            </li>
+            <li>
+                <a class="contacts__link contacts__link--vk" href="https://github.com/sergey831">VK</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+    <template id="picture">
+        <a href="#" class="picture__link">
+            <img class="picture__img" src="" alt="Случайные фотографии" width="182" height="182">
+            <p class="picture__stats">
+                <span class="picture__stat picture__stat--comments"></span>
+                <span class="picture__stat picture__stat--likes"></span>
+            </p>
+        </a>
+
+        <div class="img-upload__message img-upload__message--gragndrop hidden">Сюда!</div>
+        <div class="img-upload__message img-upload__message--loading hidden">Загружаем...</div>
+        <div class="img-upload__message img-upload__message--processing hidden">Фотобум...</div>
+
+        <div class="img-upload__message img-upload__message--error error hidden">Ошибка загрузки файла
+            <div class="error__links">
+                <a href="#" class="error__link">Попробывать снова</a>
+                <a href="#" class="error__link">Загрузить другой файл</a>
+            </div>
+        </div>
+    </template>
+
+</body>
+</html>
